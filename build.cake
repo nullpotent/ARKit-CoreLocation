@@ -17,7 +17,7 @@ Task ("clean").Does (() =>
             .WithTarget("Clean"));
 });
 
-Task ("libs").Does(() =>
+Task ("build").Does(() =>
 {
 	MSBuild(SOLUTION_PATH, c =>
 		c.SetConfiguration(CONFIGURATION)
@@ -27,7 +27,7 @@ Task ("libs").Does(() =>
 			.WithProperty("DesignTimeBuild", "false"));
 });
 
-Task ("nuget").IsDependentOn("libs").Does(() =>
+Task ("pack").IsDependentOn("build").Does(() =>
 {
     EnsureDirectoryExists(ARTIFACTS_DIR);
     var gitVersion = GitVersioningGetVersion($"{new FilePath(SOLUTION_PATH).GetDirectory()}");
@@ -42,34 +42,6 @@ Task ("nuget").IsDependentOn("libs").Does(() =>
             .WithProperty("PackageVersion", gitVersion.NuGetPackageVersion.ToString())
             .WithProperty("PackageOutputPath", ARTIFACTS_DIR)
 			.WithProperty("DesignTimeBuild", "false"));
-});
-
-Task ("publish").IsDependentOn("nuget").Does(() => 
-{
-    if (!IS_CLOUD_BUILD) 
-    {
-        Error("Script is not being run by a build task.");
-        return;
-    }
-
-    var feed = new {
-        Name = EnvironmentVariable("FEED_NAME") ?? Argument<string>("FEED_NAME"),
-        Source = EnvironmentVariable("FEED_SOURCE") ?? Argument<string>("FEED_SOURCE"),
-        Username = EnvironmentVariable("FEED_USERNAME") ?? Argument<string>("FEED_USERNAME"),
-        Password = EnvironmentVariable("FEED_PASSWORD") ?? Argument<string>("FEED_PASSWORD"),
-    };
-
-    NuGetAddSource(feed.Name, feed.Source, new NuGetSourcesSettings {
-        Password = feed.Password,
-        UserName = feed.Username,
-        Verbosity = NuGetVerbosity.Detailed,
-    });
-    
-    NuGetPush(GetFiles($"{ARTIFACTS_DIR}/*.nupkg"), new NuGetPushSettings {
-        ApiKey = "VSTS",
-        Source =  feed.Name,
-        Verbosity = NuGetVerbosity.Detailed,
-    });
 });
 
 RunTarget (TARGET);
