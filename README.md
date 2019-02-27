@@ -22,10 +22,10 @@ Use the `build.cake` script to build. You can execute it via one of the bootstra
 
 Mac:
 ```
-sh build.sh --target libs
+sh build.sh --target build
 ```
 
 Windows:
 ```
-powershell build.ps1 -Target libs
+powershell build.ps1 -Target build
 ```
