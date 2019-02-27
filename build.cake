@@ -39,7 +39,7 @@ Task ("pack").IsDependentOn("build").Does(() =>
             .WithProperty("AssemblyVersion", gitVersion.AssemblyVersion.ToString())
             .WithProperty("AssemblyFileVersion", gitVersion.AssemblyFileVersion.ToString())
             .WithProperty("AssemblyInformationalVersion", gitVersion.AssemblyInformationalVersion.ToString())
-            .WithProperty("PackageVersion", gitVersion.NuGetPackageVersion.ToString())
+            .WithProperty("PackageVersion", gitVersion.SemVer1)
             .WithProperty("PackageOutputPath", ARTIFACTS_DIR)
 			.WithProperty("DesignTimeBuild", "false"));
 });

@@ -14,7 +14,7 @@ Xamarin.iOS port of [ARKit-CoreLocation.](https://github.com/ProjectDent/ARKit-C
 
 ## Installation
 
-[Download NuGet](https://www.nuget.org/packages/ARKit-CoreLocation/3.0.6-beta)
+[From NuGet](https://www.nuget.org/packages/ARKit-CoreLocation)
 
 ## Building
 
