@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/1.6.68">
+  <PropertyGroup>
+    <TargetFramework>Xamarin.iOS10</TargetFramework>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+  </PropertyGroup>
+  <!-- nuget packaging -->
+  <PropertyGroup Label="PackageProperties">
+    <NeutralLanguage>en</NeutralLanguage>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IsPackable>true</IsPackable>
+    <UseFullSemVerForNuGet>true</UseFullSemVerForNuGet>
+    <PackageId>$(MSBuildProjectName)</PackageId>
+    <Product>$(MSBuildProjectName) ($(TargetFramework))</Product>
+    <Title>$(PackageId)</Title>
+    <Summary>Xamarin.iOS port of ARKit-CoreLocation. ARKit-CoreLocation combines the high accuracy of AR with the scale of GPS data.</Summary>
+    <Description>Xamarin.iOS port of ARKit-CoreLocation. ARKit-CoreLocation combines the high accuracy of AR with the scale of GPS data.</Description>
+    <Authors>Aleksandar Milic</Authors>
+    <Owners>Aleksandar Milic</Owners>
+    <Copyright>© $([System.DateTime]::Now.Year) Aleksandar Milic</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>xamarin ios arkit corelocation arcl</PackageTags>
+    <PackageIconUrl>https://github.com/ProjectDent.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/appsourcers/ARKit-CoreLocation/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/appsourcers/ARKit-CoreLocation</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/appsourcers/ARKit-CoreLocation.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup Label="PackageItems">
+    <None Include="..\..\LICENSE.txt" Visible="False" Pack="true" PackagePath="" />
+    <None Include="..\..\THIRD-PARTY-NOTICE.txt" Visible="False" Pack="true" PackagePath="" />
+  </ItemGroup>
+</Project>
